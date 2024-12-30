@@ -8,7 +8,7 @@ const recipeController = require('../controllers/recipeController');
 
 recipeRouter.post('/create-recipe', Authenticate('cheif'), upload.none(), recipeController.postCreateRecipe);
 
-recipeRouter.get('/recipes', recipeController.getRecipes);
+recipeRouter.get('/recipes', Authenticate(), upload.none(), recipeController.getRecipes);
 
 recipeRouter.get('/view-recipe', Authenticate(), recipeController.getViewRecipe);
 
