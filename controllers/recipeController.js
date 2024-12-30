@@ -50,6 +50,44 @@ exports.postCreateRecipe = async (req, res, next) => {
 
 };
 
+// exports.getRecipes = async (req, res, next) => {
+//     try{
+//         const { searchParams } = req.body;
+        
+//         let recipeData = '';
+//         if(searchParams.length > 0){
+//             recipeData = await Recipe.find({ category: { $regex: searchParams, $options: 'i' }, deleted_at: null }).populate({
+//                 path: "user_id",
+//                 select: "name email profile_picture gender experience specialty certifications availability city state country postal_code social_links"
+//             }).populate({
+//                 path: "comments",
+//                 select: "message rating created_at user_id",
+//                 populate:{
+//                     path: "user_id",
+//                     select: "name profile_picture gender _id"
+//                 }
+//             });
+//         }else{
+//             recipeData = await Recipe.find({ deleted_at: null }).populate({
+//                 path: "user_id",
+//                 select: "name email profile_picture gender experience specialty certifications availability city state country postal_code social_links"
+//             }).populate({
+//                 path: "comments",
+//                 select: "message rating created_at user_id",
+//                 populate:{
+//                     path: "user_id",
+//                     select: "name profile_picture gender _id"
+//                 }
+//             });
+//         }
+
+//         return Response200(null, 'Recipe Data Fetch Successfully!', recipeData, res);
+//     }
+//     catch(err){
+//         console.log('Internal Error: ', err);
+//         return Response500(err || err.message, "Internal Server Error", res);
+//     }
+// };
 exports.getRecipes = async (req, res, next) => {
     try{
         const { searchParams } = req.body;
@@ -58,26 +96,18 @@ exports.getRecipes = async (req, res, next) => {
         if(searchParams.length > 0){
             recipeData = await Recipe.find({ category: { $regex: searchParams, $options: 'i' }, deleted_at: null }).populate({
                 path: "user_id",
-                select: "name email profile_picture gender experience specialty certifications availability city state country postal_code social_links"
+                select: "name profile_picture"  // Reduced to only essential fields
             }).populate({
                 path: "comments",
-                select: "message rating created_at user_id",
-                populate:{
-                    path: "user_id",
-                    select: "name profile_picture gender _id"
-                }
+                select: "message rating created_at", // Removed user_id and extra fields
             });
-        }else{
+        } else {
             recipeData = await Recipe.find({ deleted_at: null }).populate({
                 path: "user_id",
-                select: "name email profile_picture gender experience specialty certifications availability city state country postal_code social_links"
+                select: "name profile_picture"  // Reduced to only essential fields
             }).populate({
                 path: "comments",
-                select: "message rating created_at user_id",
-                populate:{
-                    path: "user_id",
-                    select: "name profile_picture gender _id"
-                }
+                select: "message rating created_at", // Removed user_id and extra fields
             });
         }
 
@@ -88,6 +118,7 @@ exports.getRecipes = async (req, res, next) => {
         return Response500(err || err.message, "Internal Server Error", res);
     }
 };
+
 
 exports.getViewRecipe = async (req, res, next) => {
     const { recipe_id } = req.query;
