@@ -1,6 +1,6 @@
 const { Required, Password, Email } = require('../helpers/validation');
 const { Response400, Response404, Response500, Response200 } = require('../Functions/Responce');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const Users = require('../models/users');
 const { removeEmptyProperties } = require('../helpers/filterObject');
 const { TokenGenerate } = require('../Functions/GenerateToken');
