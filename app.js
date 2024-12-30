@@ -2,7 +2,7 @@ var express = require('express');
 var path = require('path');
 var logger = require('morgan');
 const { mongoConnect } = require('./config/database');
-const port = 4573;
+const port = process.env.PORT || 3000;
 
 var usersRouter = require('./routes/users');
 var recipeRouter = require('./routes/recipe');
