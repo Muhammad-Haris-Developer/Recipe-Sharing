@@ -18,8 +18,8 @@ recipeRouter.post('/delete-recipe', Authenticate('cheif'), upload.none(), recipe
 
 recipeRouter.get('/categories', Authenticate(), recipeController.getAllCategory);
 
-recipeRouter.post('/add-category', Authenticate('cheif'), upload.none(), recipeController.postCreateCategory);
+recipeRouter.post('/add-category', Authenticate('admin'), upload.none(), recipeController.postCreateCategory);
 
-recipeRouter.post('/edit-category', Authenticate('cheif'), upload.none(), recipeController.postEditCategory);
+recipeRouter.post('/edit-category', Authenticate('admin'), upload.none(), recipeController.postEditCategory);
 
 module.exports = recipeRouter;

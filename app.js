@@ -8,8 +8,12 @@ var usersRouter = require('./routes/users');
 var recipeRouter = require('./routes/recipe');
 var ratingRouter = require('./routes/rating');
 var likesRouter = require('./routes/likes');
+var indexRouter = require('./routes/index');
 
 var app = express();
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -20,6 +24,7 @@ app.use(usersRouter);
 app.use(recipeRouter);
 app.use(ratingRouter);
 app.use(likesRouter);
+app.use(indexRouter);
 
 app.use((req, res, next) => {
   return res.status(404).json({
