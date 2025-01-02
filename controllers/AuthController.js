@@ -7,6 +7,7 @@ const { TokenGenerate } = require('../Functions/GenerateToken');
 const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
+const SendEmail = require('../Functions/EmailSend');
 
 // Image Store Function
 const storage = multer.diskStorage({
@@ -85,6 +86,14 @@ exports.Register = async (req, res, next) => {
             const registerUser = Users(filterObject);
             const saveUser = await registerUser.save();
 
+            //Email Send Success Registration
+            const from = 'Recipe-Sharing-Platform';
+            const subject = "Registration Successfull";
+            const text = "You have successfully registered on our platform. Now you can login and use our services.";
+            const html = "<h1>You have successfully registered on our platform. Now you can login and use our services.</h1>";
+
+            await SendEmail(from, email, subject, text, html);
+
             return Response200(null, 'User Registered Successfully!', saveUser, res);
         }
 
@@ -157,6 +166,14 @@ exports.Register = async (req, res, next) => {
 
             const registerUser = Users(filterObject);
             const saveUser = await registerUser.save();
+
+            //Email Send Success Registration
+            const from = 'Recipe-Sharing-Platform';
+            const subject = "Registration Successfull";
+            const text = "You have successfully registered on our platform. Now you can login and use our services.";
+            const html = "<h1>You have successfully registered on our platform. Now you can login and use our services.</h1>";
+
+            await SendEmail(from, email, subject, text, html);
 
             return Response200(null, 'User Registered Successfully!', saveUser, res);
         }
