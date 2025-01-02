@@ -7,7 +7,7 @@ const { TokenGenerate } = require('../Functions/GenerateToken');
 const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
-const SendEmail = require('../Functions/EmailSend');
+const { SendEmail } = require('../Functions/EmailSend');
 
 // Image Store Function
 const storage = multer.diskStorage({
